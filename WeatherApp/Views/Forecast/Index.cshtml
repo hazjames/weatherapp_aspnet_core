@@ -1,0 +1,65 @@
+﻿@model WeatherApp.Models.WeatherViewModels.ForecastsView
+
+@{
+    ViewData["Title"] = "Forecasts";
+}
+
+<h1>Forecasts for @Model.Location.LocationName</h1>
+
+<ul class="nav nav-pills nav-justified">
+    <li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#daily">Daily</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#hourly">Hourly</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="daily" role="tabpanel" class="tab-pane fade in active show">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Minimum</th>
+                    <th>Maximum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DailyForecasts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Day)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MinimumTemp)&deg;C
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaximumTemp)&deg;C
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="hourly" role="tabpanel" class="tab-pane fade">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Temperature</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.HourlyForecasts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Temperature)&deg;C
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
